@@ -5,32 +5,18 @@ import java.util.Queue;
 public class ActorProxy implements Iactor{
 
     private Queue<Message> queue;
+    private final Iactor iActor;
 
-    private Thread thread;
-
-    public ActorProxy(){
-        thread = new Thread();
-        thread.start(); //esto llamara a run
+    public ActorProxy(Iactor sourceActor){
+        this.iActor = sourceActor;     //referencia del actor que le pertoca al proxy
     }
-
     @Override
-    public void run() {     //El proxy va procesando los mensajes que tiene en la cola y los va enviando
-        Message message;
-        while (true){
-            message = queue.poll();
-            if(message != null){
-                send(message);
-            }
-        }
+    public void send(Message message) {
+
     }
 
-    public void send (Message message){
-        message.getActorReference().getQueue().add(message);
+    public Message receive(){ //falta implementar
+        return new Message(new ActorProxy(new Actor()), "HOLA");
     }
-
-    public Message receive(){
-        return new Message(new Actor(),"hola");
-    }
-
 
 }

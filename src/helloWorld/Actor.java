@@ -3,15 +3,16 @@ package helloWorld;
 import java.util.Queue;
 
 
-public class Actor implements Iactor {
+public class Actor implements Iactor, Runnable{
     private Queue<Message> queue;
-    private String state = "contento";
+    private String state;
 
     private Thread thread;
 
     public Actor(){
         thread = new Thread();
         thread.start(); //esto llamara a run
+        this.state = "activo";
     }
 
     @Override
@@ -25,16 +26,18 @@ public class Actor implements Iactor {
         }
     }
 
-    //FALTA METODO PARA ENVIARSE A SI MISMO MENSAJE
+                        //FALTA METODO PARA ENVIARSE A SI MISMO MENSAJE
     void process(Message message){  //en esta funcion actualizaremos estado
-        if(message.getMessage().equals("helloWorld")){  //de momento solo esta este estado
-            System.out.printf(message.getMessage());
-            this.state = "contento";
-        }else{
-            System.out.printf("Bye World!!!");
-        }
+       /* switch (message){
+            case  X-> etc etc
+        }*/
     }
 
+
+    @Override
+    public void send(Message message) {
+        //FALTA IMPLEMENTACION
+    }
 
     public Queue<Message> getQueue() {
         return queue;
@@ -59,4 +62,5 @@ public class Actor implements Iactor {
     public void setThread(Thread thread) {
         this.thread = thread;
     }
+
 }

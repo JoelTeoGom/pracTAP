@@ -1,6 +1,6 @@
 package helloWorld;
 
-public interface Iactor extends Runnable {
-    @Override
-    void run();
+public interface Iactor {
+   void send(Message message);
+
 }

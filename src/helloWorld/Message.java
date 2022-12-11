@@ -1,21 +1,21 @@
 package helloWorld;
 
 public class Message {
-    private Actor actorReference; //sera el actor que recibira el mensaje
-    private String message;        //texto
+    private ActorProxy from;  //PROXY
+    private String message;   //texto
 
 
-    public Message(Actor actorReference, String message) {
-        this.actorReference = actorReference;
+    public Message(ActorProxy from, String message) {
+        this.from = from;
         this.message = message;
     }
 
-    public Actor getActorReference() {
-        return actorReference;
+    public ActorProxy getFrom() {
+        return from;
     }
 
-    public void setActorReference(Actor actorReference) {
-        this.actorReference = actorReference;
+    public void setFrom(ActorProxy from) {
+        this.from = from;
     }
 
     public String getMessage() {

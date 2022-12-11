@@ -13,14 +13,15 @@ public class ActorContext {
     }
 
     public ActorProxy spawnActor(String name, Actor actor){
+        ActorProxy proxy = new ActorProxy();
 
         return new ActorProxy();
     }
 
-    public Actor lookup(String name){
+    public ActorProxy lookup(String name){
 
 
-        return new Actor();
+        return new ActorProxy();
     }
 
     public void getNames(){

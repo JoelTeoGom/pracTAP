@@ -1,4 +1,4 @@
 package helloWorld;
 
-public class InsultActor {
+public class InsultActor extends Actor{
 }
