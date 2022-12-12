@@ -1,5 +1,10 @@
-package helloWorld;
+package HelloWorld;
 
+
+
+import Message.*;
+
+import java.util.LinkedList;
 import java.util.Queue;
 
 
@@ -11,26 +16,39 @@ public class Actor implements Iactor, Runnable{
 
     public Actor(){
         thread = new Thread();
-        thread.start(); //esto llamara a run
+         //esto llamara a run
         this.state = "activo";
+        queue = new LinkedList<Message>();
+        thread.start();
     }
 
     @Override
     public void run() {
         Message message;
-        while (true){
-            message = queue.poll(); //FIFO y luego procesamos
-            if(message != null){
+        while (true) {
+            if (!queue.isEmpty()){
+                message = queue.poll(); //FIFO y luego procesamos
                 process(message);    //procesamos mensajes si hay en la cola
             }
         }
     }
 
                         //FALTA METODO PARA ENVIARSE A SI MISMO MENSAJE
-    void process(Message message){  //en esta funcion actualizaremos estado
-       /* switch (message){
-            case  X-> etc etc
-        }*/
+    void process(Message m){  //en esta funcion actualizaremos estado
+
+        System.out.println(m.getMessage());
+        switch (m){
+            case HelloWorldMessage m1:
+                System.out.printf(m1.getMessage());
+                break;
+            case QuitMessage m1:
+                System.out.printf("Oh hell naw!!!");
+                break;
+            case InsultMessage m1:
+                System.out.printf("Da fk did u just told me");
+                break;
+            default : System.out.printf("No se ha registrado");
+        }
     }
 
 

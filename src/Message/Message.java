@@ -1,4 +1,6 @@
-package helloWorld;
+package Message;
+
+import HelloWorld.ActorProxy;
 
 public class Message {
     private ActorProxy from;  //PROXY
