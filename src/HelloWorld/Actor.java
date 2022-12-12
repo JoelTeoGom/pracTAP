@@ -1,25 +1,20 @@
 package HelloWorld;
 
-
-
 import Message.*;
-
 import java.util.LinkedList;
 import java.util.Queue;
 
-
-public class Actor implements Iactor, Runnable{
+public class Actor implements Runnable, Iactor{
     private Queue<Message> queue;
     private String state;
 
     private Thread thread;
 
     public Actor(){
-        thread = new Thread();
-         //esto llamara a run
+        thread = new Thread(this); //observacion: hay que pasarle el objeto que el thread tiene que correr
         this.state = "activo";
         queue = new LinkedList<Message>();
-        thread.start();
+        thread.start();//Observacion: hay que poner la llamada del thread lo ultimo
     }
 
     @Override
@@ -33,10 +28,13 @@ public class Actor implements Iactor, Runnable{
         }
     }
 
-                        //FALTA METODO PARA ENVIARSE A SI MISMO MENSAJE
+    @Override
+    public void send(Message message) {
+        //FALTA METODO PARA reenviar mensaje
+    }
+
     void process(Message m){  //en esta funcion actualizaremos estado
 
-        System.out.println(m.getMessage());
         switch (m){
             case HelloWorldMessage m1:
                 System.out.printf(m1.getMessage());
@@ -51,11 +49,6 @@ public class Actor implements Iactor, Runnable{
         }
     }
 
-
-    @Override
-    public void send(Message message) {
-        //FALTA IMPLEMENTACION
-    }
 
     public Queue<Message> getQueue() {
         return queue;
@@ -80,5 +73,6 @@ public class Actor implements Iactor, Runnable{
     public void setThread(Thread thread) {
         this.thread = thread;
     }
+
 
 }

@@ -3,6 +3,5 @@ package HelloWorld;
 import Message.Message;
 
 public interface Iactor {
-   void send(Message message);
-
+    public void send(Message message);
 }

@@ -15,7 +15,6 @@ public class ActorContext {
     }
 
     public ActorProxy spawnActor(String name, Actor actor){
-        System.out.println(actor);
         ActorProxy actorProxy = new ActorProxy(actor);
         this.actorLibrary.put(name,actor);
         this.proxyLibrary.put(name,actorProxy);
