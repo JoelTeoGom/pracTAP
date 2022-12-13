@@ -1,6 +1,6 @@
 package Message;
 
-import HelloWorld.ActorProxy;
+import Estructura.ActorProxy;
 
 public class QuitMessage extends Message{
     public QuitMessage(ActorProxy from, String message) {

@@ -1,6 +1,6 @@
 package otros;
 
-import HelloWorld.Actor;
+import Estructura.Actor;
 
 public class RingActor extends Actor {
 

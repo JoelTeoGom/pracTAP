@@ -1,4 +1,4 @@
-package HelloWorld;
+package Estructura;
 
 import Message.*;
 
@@ -14,6 +14,9 @@ public class ActorProxy implements Iactor{
     }
     @Override
     public void send(Message message) {
+        if(message.getFrom() == null){    //en caso que el from del mensaje este Null por default se pondra el propio proxy
+            message.setFrom(this);          //asi podra responder el actor
+        }
         this.sourceActor.getQueue().add(message);
     }
 

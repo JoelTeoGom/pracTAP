@@ -1,5 +1,7 @@
-package HelloWorld;
+package Estructura;
 
+import HelloWorld.HelloWorldMessage;
+import Insult.*;
 import Message.*;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -30,23 +32,24 @@ public class Actor implements Runnable, Iactor{
 
     @Override
     public void send(Message message) {
-        //FALTA METODO PARA reenviar mensaje
+
     }
 
     void process(Message m){  //en esta funcion actualizaremos estado
-
-        switch (m){
-            case HelloWorldMessage m1:
-                System.out.printf(m1.getMessage());
-                break;
-            case QuitMessage m1:
-                System.out.printf("Oh hell naw!!!");
-                break;
-            case InsultMessage m1:
-                System.out.printf("Da fk did u just told me");
-                break;
-            default : System.out.printf("No se ha registrado");
-        }
+        System.out.println("SOY un actor padre");
+//        switch (m){
+//            case HelloWorldMessage m1:
+//                System.out.printf(m1.getMessage());
+//                break;
+//            case QuitMessage m1:
+//                System.out.printf("Oh hell naw!!!");
+//
+//                break;
+//            case InsultMessage m1:
+//                System.out.printf("Da fk did u just told me");
+//                break;
+//            default : System.out.printf("No se ha registrado");
+//        }
     }
 
 
