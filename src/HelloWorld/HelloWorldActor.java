@@ -8,7 +8,8 @@ public class HelloWorldActor extends Actor{
         super();
     }
 
-    void process(Message m){  //en esta funcion actualizaremos estado
+    @Override
+    protected void process(Message m){  //en esta funcion actualizaremos estado
         switch (m){
             case HelloWorldMessage m1:
                 System.out.printf(m1.getMessage());

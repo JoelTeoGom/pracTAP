@@ -2,6 +2,7 @@ package Estructura;
 
 import Message.*;
 
+import java.util.LinkedList;
 import java.util.Queue;
 
 public class ActorProxy implements Iactor{
@@ -11,6 +12,7 @@ public class ActorProxy implements Iactor{
 
     public ActorProxy(Actor sourceActor){
         this.sourceActor = sourceActor;     //referencia del actor que le pertoca al proxy
+        queue = new LinkedList<Message>();
     }
     @Override
     public void send(Message message) {
@@ -21,7 +23,9 @@ public class ActorProxy implements Iactor{
     }
 
     public Message receive(){ //falta implementar
-        return new Message(new ActorProxy(new Actor()), "HOLA");
+        while (queue.isEmpty()){}
+
+        return queue.poll();
     }
 
     public Queue<Message> getQueue() {

@@ -1,22 +1,23 @@
 package Message;
 
+import Estructura.ActorProxy;
 import Estructura.Iactor;
 
 public class Message {
-    private Iactor from;  //PROXY
-    private String message;   //texto
+    protected ActorProxy from;  //PROXY
+    protected String message;   //texto
 
 
-    public Message(Iactor from, String message) {
+    public Message(ActorProxy from, String message) {
         this.from = from;
         this.message = message;
     }
 
-    public Iactor getFrom() {
+    public ActorProxy getFrom() {
         return from;
     }
 
-    public void setFrom(Iactor from) {
+    public void setFrom(ActorProxy from) {
         this.from = from;
     }
 

@@ -5,15 +5,23 @@ import Estructura.ActorContext;
 import Estructura.ActorProxy;
 import HelloWorld.HelloWorldActor;
 import HelloWorld.HelloWorldMessage;
+import Insult.*;
 import Message.*;
 
 
 public class App {
     public static void main(String[] args) {
-        ActorProxy x = ActorContext.getInstance().spawnActor("Mundo", new HelloWorldActor());
-        x.send(new HelloWorldMessage(null,"HOLA MUNDO"));
+       /* ActorProxy x = ActorContext.getInstance().spawnActor("ACTOR1", new Actor());
+        x.send(new QuitMessage(null,"muere"));*/
 
-
+        ActorProxy insult = ActorContext.getInstance().spawnActor("Actor",new InsultActor());
+        insult.send(new AddInsultMessage(null, "pendejo"));
+        insult.send(new GetAllInsultMessage(null));
+        Message result = insult.receive();
+        insult.send(new GetInsultMessage(null));
+        System.out.println(result.getMessage());
+        result = insult.receive();
+        System.out.println(result.getMessage());
 //
 //        ActorProxy proxy2 = ActorContext.getInstance().spawnActor("Actor2", new Actor());
 //        ActorProxy proxy1 = ActorContext.getInstance().spawnActor("Actor1", new Actor());

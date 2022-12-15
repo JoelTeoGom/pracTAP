@@ -1,12 +1,13 @@
 package Insult;
 
+import Estructura.ActorProxy;
 import Estructura.Iactor;
 import Message.Message;
 
 public class GetInsultMessage extends Message {
 
+    public GetInsultMessage(ActorProxy from) {
 
-    public GetInsultMessage(Iactor from, String message) {
-        super(from, message);
+        super(from, "");
     }
 }
