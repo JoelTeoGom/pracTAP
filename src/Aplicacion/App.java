@@ -14,7 +14,7 @@ public class App {
        /* ActorProxy x = ActorContext.getInstance().spawnActor("ACTOR1", new Actor());
         x.send(new QuitMessage(null,"muere"));*/
 
-        ActorProxy insult = ActorContext.getInstance().spawnActor("Actor",new InsultActor());
+        ActorProxy insult = ActorContext.getInstance().spawnActor("ActorInsult",new InsultActor());
         insult.send(new AddInsultMessage(null, "pendejo"));
         insult.send(new GetAllInsultMessage(null));
         Message result = insult.receive();
@@ -27,10 +27,6 @@ public class App {
 //        ActorProxy proxy1 = ActorContext.getInstance().spawnActor("Actor1", new Actor());
 //
 //        System.out.println(ActorContext.getInstance().getNames().toString());
-//        ActorProxy proxy3 = ActorContext.getInstance().lookup("Actor1");
-//
-//        if(proxy3==proxy1)
-//            System.out.println("son el mismoooo!!!!");
 //
 ////        System.out.println(proxy1.getSourceActor());
 //
@@ -38,6 +34,7 @@ public class App {
 //        //proxy1.send(new HelloWorldMessage(null,"Hello World from ACTOR 1"));
 //
 //        proxy2.send(new HelloWorldMessage(proxy1,"Hello World from ACTOR 1"));
+        //proxy1.send(new HelloWorldMessage(proxy1,"Hello World from ACTOR 1"));
 //        //desde proxy 1(actor1) le enviamos mensaje a proxy2(actor2)
 //
 //        proxy2.send(new QuitMessage(proxy1,"bye"));

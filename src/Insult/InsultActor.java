@@ -14,9 +14,9 @@ public class InsultActor extends Actor {
 
     public InsultActor() {
         super();
-        listaInsultos.add("cabron");
-        listaInsultos.add("joputa");
-        listaInsultos.add("lloron");
+        listaInsultos.add("taco");
+        listaInsultos.add("taco2");
+        listaInsultos.add("taco3");
     }
 
 
