@@ -22,7 +22,7 @@ public class ActorProxy implements Iactor{
         this.sourceActor.getQueue().add(message);
     }
 
-    public Message receive(){ //falta implementar
+    public Message receive(){
         while (queue.isEmpty()){}
 
         return queue.poll();

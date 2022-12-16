@@ -1,9 +1,7 @@
 package Insult;
 
 import Estructura.Actor;
-import Estructura.ActorProxy;
 import Message.*;
-import Insult.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +11,7 @@ public class InsultActor extends Actor {
     private List<String> listaInsultos = new ArrayList<>();
 
     public InsultActor() {
-        super();
+        super(actor);
         listaInsultos.add("taco");
         listaInsultos.add("taco2");
         listaInsultos.add("taco3");

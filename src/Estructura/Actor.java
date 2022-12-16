@@ -1,7 +1,6 @@
 package Estructura;
 
 import HelloWorld.HelloWorldMessage;
-import Insult.*;
 import Message.*;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -12,7 +11,7 @@ public class Actor implements Runnable, Iactor{
     private Boolean exit;
     private Thread thread;
 
-    public Actor(){
+    public Actor(Actor actor){
         thread = new Thread(this); //observacion: hay que pasarle el objeto que el thread tiene que correr
         this.state = "activo";
         queue = new LinkedList<Message>();
