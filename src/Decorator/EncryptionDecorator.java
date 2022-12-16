@@ -21,15 +21,15 @@ public class EncryptionDecorator extends Actor {
     protected void setExit(){super.setExit();}
     public Queue<Message> getQueue() {return super.getQueue();}
 
-    public void setQueue(Queue<Message> queue) {super.setQueue();}
+    //public void setQueue(Queue<Message> queue) {super.setQueue();}
 
     public String getState() {return super.getState();}
 
-    public void setState(String state) {super.setState();}
+    //public void setState(String state) {super.setState();}
 
     public Thread getThread() {return super.getThread();}
 
-    public void setThread(Thread thread){super.setThread();}
+    //public void setThread(Thread thread){super.setThread();}
 
 
     public Boolean getExit() {return super.getExit();}

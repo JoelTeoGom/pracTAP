@@ -11,7 +11,7 @@ public class InsultActor extends Actor {
     private List<String> listaInsultos = new ArrayList<>();
 
     public InsultActor() {
-        super(actor);
+        super();
         listaInsultos.add("taco");
         listaInsultos.add("taco2");
         listaInsultos.add("taco3");

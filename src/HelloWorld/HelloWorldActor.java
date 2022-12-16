@@ -5,7 +5,7 @@ import Message.Message;
 
 public class HelloWorldActor extends Actor{
     public HelloWorldActor() {
-        super(actor);
+        super();
     }
 
     @Override
