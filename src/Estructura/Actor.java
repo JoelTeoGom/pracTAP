@@ -1,11 +1,12 @@
 package Estructura;
 
+import Decorator.ActorInterface;
 import HelloWorld.HelloWorldMessage;
 import Message.*;
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Actor implements Runnable, Iactor{
+public class Actor implements Runnable, Iactor, ActorInterface {
     private Queue<Message> queue;
     private String state;
     private Boolean exit;
@@ -41,11 +42,11 @@ public class Actor implements Runnable, Iactor{
         message.getFrom().getQueue().put(m);
     }
 
-    protected void setExit(){
+    public void setExit(){
         exit = true;
     }
 
-    protected void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
+    public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
         System.out.println("SOY un actor padre");
         switch (m){
             case HelloWorldMessage m1:

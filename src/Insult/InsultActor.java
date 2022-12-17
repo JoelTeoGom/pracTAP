@@ -17,7 +17,7 @@ public class InsultActor extends Actor {
 
 
     @Override
-    protected void process(Message message) throws InterruptedException {
+    public void process(Message message) throws InterruptedException {
         listaInsultos.add("taco");
         listaInsultos.add("taco2");
         listaInsultos.add("taco3");
