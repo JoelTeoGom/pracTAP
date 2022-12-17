@@ -11,8 +11,8 @@ import java.util.Queue;
  */
 public class EncryptionDecorator extends Actor {
 
-    public EncryptionDecorator(Actor actor) {
-        super(actor);
+    public EncryptionDecorator() {
+        super();
     }
 
     public void send(Message message){

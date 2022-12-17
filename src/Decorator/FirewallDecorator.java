@@ -11,8 +11,8 @@ import java.util.Queue;
  */
 public class FirewallDecorator extends Actor{
 
-    public FirewallDecorator(Actor actor) {
-        super(actor);
+    public FirewallDecorator() {
+        super();
     }
 
 

@@ -11,7 +11,7 @@ public class Actor implements Runnable, Iactor{
     private Boolean exit;
     private Thread thread;
 
-    public Actor(Actor actor){
+    public Actor(){
         thread = new Thread(this); //observacion: hay que pasarle el objeto que el thread tiene que correr
         this.state = "activo";
         queue = new LinkedList<Message>();
