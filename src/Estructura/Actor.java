@@ -17,7 +17,8 @@ public class Actor implements Runnable, Iactor{
         this.state = "activo";
         queue = new LinkedList<Message>();
         exit = false;
-        thread.start();//Observacion: hay que poner la llamada del thread lo ultimo
+        thread.start();
+                        //Observacion: hay que poner la llamada del thread lo ultim
     }
 
     @Override
@@ -26,22 +27,26 @@ public class Actor implements Runnable, Iactor{
         while (!exit) {
             if (!queue.isEmpty()){
                 message = queue.poll(); //FIFO y luego procesamos
-                process(message);    //procesamos mensajes si hay en la cola
+                try {
+                    process(message);    //procesamos mensajes si hay en la cola
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
             }
         }
     }
 
     @Override
-    public void send(Message message) {
+    public void send(Message message) throws InterruptedException {
         Message m = new Message(new ActorProxy(this), message.getMessage());
-        message.getFrom().getQueue().add(m);
+        message.getFrom().getQueue().put(m);
     }
 
     protected void setExit(){
         exit = true;
     }
 
-    protected void process(Message m){  //en esta funcion actualizaremos estado
+    protected void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
         System.out.println("SOY un actor padre");
         switch (m){
             case HelloWorldMessage m1:

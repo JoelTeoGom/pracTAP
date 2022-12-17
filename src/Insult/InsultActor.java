@@ -12,16 +12,17 @@ public class InsultActor extends Actor {
 
     private List<String> listaInsultos = new ArrayList<>();
 
+
     public InsultActor() {
         super();
-        listaInsultos.add("taco");
-        listaInsultos.add("taco2");
-        listaInsultos.add("taco3");
     }
 
 
     @Override
-    protected void process(Message message) {
+    protected void process(Message message) throws InterruptedException {
+        listaInsultos.add("taco");
+        listaInsultos.add("taco2");
+        listaInsultos.add("taco3");
         switch (message){
             case AddInsultMessage m1:
                 listaInsultos.add(m1.getMessage());

@@ -4,15 +4,17 @@ import Message.*;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class ActorProxy implements Iactor{
 
-    private Queue<Message> queue;
+    private BlockingQueue<Message> queue;
     private final Actor sourceActor;
 
     public ActorProxy(Actor sourceActor){
         this.sourceActor = sourceActor;     //referencia del actor que le pertoca al proxy
-        queue = new LinkedList<Message>();
+        queue = new LinkedBlockingDeque<Message>();
     }
     @Override
     public void send(Message message) {
@@ -22,17 +24,15 @@ public class ActorProxy implements Iactor{
         this.sourceActor.getQueue().add(message);
     }
 
-    public Message receive(){ //falta implementar
-        while (queue.isEmpty()){}
-
-        return queue.poll();
+    public Message receive() throws InterruptedException { //falta implementar
+        return queue.take();
     }
 
-    public Queue<Message> getQueue() {
+    public BlockingQueue<Message> getQueue() {
         return queue;
     }
 
-    public void setQueue(Queue<Message> queue) {
+    public void setQueue(BlockingQueue<Message> queue) {
         this.queue = queue;
     }
 
