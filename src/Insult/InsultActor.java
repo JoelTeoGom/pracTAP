@@ -1,9 +1,7 @@
 package Insult;
 
 import Estructura.Actor;
-import Estructura.ActorProxy;
 import Message.*;
-import Insult.*;
 
 import java.util.ArrayList;
 import java.util.List;
