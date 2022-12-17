@@ -8,6 +8,9 @@ import java.util.Queue;
 public class ActorDecorator implements ActorInterface{
     protected Actor actor;
 
+    public ActorDecorator(Actor actor){
+        this.actor =actor;
+    }
 
     @Override
     public void run() {

@@ -10,6 +10,8 @@ import java.util.Queue;
     using an AddClosureMessage.
  */
 public class EncryptionDecorator extends ActorDecorator {
-
+    public EncryptionDecorator (Actor actor){
+        super(actor);
+    }
 
 }

@@ -28,7 +28,9 @@ public class ActorContext {
         return new ArrayList<>(actorLibrary.keySet());
     }
 
-
+    public boolean isThere(Actor actor){
+       return actorLibrary.containsKey(actor);
+    }
 
 
 
