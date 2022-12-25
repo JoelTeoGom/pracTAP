@@ -1,7 +1,8 @@
 package HelloWorld;
 
 import Estructura.Actor;
-import Message.Message;
+import Message.*;
+import Observer.MonitorService;
 
 public class HelloWorldActor extends Actor{
     public HelloWorldActor() {
@@ -10,9 +11,15 @@ public class HelloWorldActor extends Actor{
 
     @Override
     public void process(Message m){  //en esta funcion actualizaremos estado
+        MonitorService.getInstance().notifyAllObservers("Message received",this);
         switch (m){
             case HelloWorldMessage m1:
-                System.out.printf(m1.getMessage());
+                System.out.println(m1.getMessage());
+                MonitorService.getInstance().notifyAllObservers("HELLO",this);
+                break;
+            case QuitMessage m1:
+                MonitorService.getInstance().notifyAllObservers("FINISH",this);
+                setExit(true);
                 break;
             default : System.out.printf("No se ha registrado");
         }

@@ -16,6 +16,7 @@ public class ActorContext {
 
     public ActorProxy spawnActor(String name, Actor actor){
         ActorProxy actorProxy = new ActorProxy(actor);
+        Runner runner = new Runner(actor);
         this.actorLibrary.put(name,actor);
         return actorProxy;
     }
@@ -32,6 +33,7 @@ public class ActorContext {
        return actorLibrary.containsKey(actor);
     }
 
-
-
+    public HashMap<String, Actor> getActorLibrary() {
+        return actorLibrary;
+    }
 }

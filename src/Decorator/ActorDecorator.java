@@ -13,14 +13,7 @@ public class ActorDecorator implements ActorInterface{
     }
 
 
-    public void run() {
-    this.actor.run();
-    }
 
-
-    public void setExit() {
-    this.actor.setExit();
-    }
 
 
     public Queue<Message> getQueue() {
@@ -38,14 +31,8 @@ public class ActorDecorator implements ActorInterface{
     }
 
 
-    public Thread getThread() {
-        return this.actor.getThread();
-    }
 
-    @Override
-    public void setThread(Thread thread) {
-        this.actor.setThread(thread);
-    }
+
 
     @Override
     public Boolean getExit() {
