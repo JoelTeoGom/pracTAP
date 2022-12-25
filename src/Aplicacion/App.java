@@ -1,5 +1,6 @@
 package Aplicacion;
 
+import Decorator.FirewallDecorator;
 import Estructura.Actor;
 import Estructura.ActorContext;
 import Estructura.ActorProxy;

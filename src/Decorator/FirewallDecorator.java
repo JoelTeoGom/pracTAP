@@ -15,10 +15,7 @@ public class FirewallDecorator extends ActorDecorator {
     }
 
     public void process(Message m) throws InterruptedException {
-      if(actor.getState().equals("activo") && a.isThere(actor)){
-          this.actor.process(m);
-      }else {
-          //error
-      }
+      if(actor.getState().equals("activo") && a.isThere(actor)) this.actor.process(m);
     }
+
 }

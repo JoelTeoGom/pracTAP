@@ -12,32 +12,32 @@ public class ActorDecorator implements ActorInterface{
         this.actor =actor;
     }
 
-    @Override
+
     public void run() {
     this.actor.run();
     }
 
-    @Override
+
     public void setExit() {
     this.actor.setExit();
     }
 
-    @Override
+
     public Queue<Message> getQueue() {
         return this.actor.getQueue();
     }
 
-    @Override
+
     public String getState() {
         return actor.getState();
     }
 
-    @Override
+
     public void setState(String state) {
         this.actor.setState(state);
     }
 
-    @Override
+
     public Thread getThread() {
         return this.actor.getThread();
     }
