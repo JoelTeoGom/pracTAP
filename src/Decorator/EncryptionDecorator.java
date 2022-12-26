@@ -2,7 +2,7 @@ package Decorator;
 
 import Estructura.Actor;
 import Message.Message;
-import java.util.Arrays;
+
 
 
 /*
@@ -16,10 +16,10 @@ public class EncryptionDecorator extends ActorDecorator {
     public void send(Message message) throws InterruptedException {
         String text = message.getMessage();
         char[] chars = text.toCharArray();
-        for (char c: chars){
-            c +=5;
+        for (int i=0;i<chars.length;i++){
+            chars[i] -= 5;
         }
-        message.setMessage(Arrays.toString(chars));
+        message.setMessage(String.valueOf(chars));
         super.send(message);
 
     }
@@ -28,10 +28,10 @@ public class EncryptionDecorator extends ActorDecorator {
     public void process(Message m) throws InterruptedException {
         String text = m.getMessage();
         char[] chars = text.toCharArray();
-        for (char c: chars){
-            c -=5;
+        for (int i=0;i<chars.length;i++){
+            chars[i] -= 5;
         }
-        m.setMessage(Arrays.toString(chars));
+        m.setMessage(String.valueOf(chars));
         super.process(m);
     }
 }
