@@ -14,13 +14,15 @@ public class Actor implements ActorInterface,Iactor{
     private String state;
     private Boolean exit;
 
+    private int traffic;
 
 
     public Actor(){
-        this.state = "activo";
+        traffic = 0;
+        this.state = "CREATED";
         queue = new LinkedList<Message>();
         exit = false;
-//        MonitorService.getInstance().notifyAllObservers("Created",this);
+
     }
 
 
@@ -28,20 +30,35 @@ public class Actor implements ActorInterface,Iactor{
     public void send(Message message) throws InterruptedException {
         Message m = new Message(new ActorProxy(this), message.getMessage());
         message.getFrom().getQueue().put(m);
+        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this)){
+            MonitorService.getInstance().putAllMessages(this,m);
+            MonitorService.getInstance().putSentMessage(this,m);
+        }
+        traffic++;      //nuevo mensaje generado
     }
 
 
     public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
         System.out.println("SOY un actor padre");
-        MonitorService.getInstance().notifyAllObservers("Received message",this);
+        setState("RECEIVED MESSAGE");
+
+        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this)){
+            MonitorService.getInstance().notifyAllObservers(state,this);
+            MonitorService.getInstance().putAllMessages(this,m);
+            MonitorService.getInstance().putReceivedMessage(this,m);
+        }
+
+        traffic++; //nuevo mensaje procesado
+
         switch (m){
             case HelloWorldMessage m1:
                 System.out.printf(m1.getMessage());
                 break;
             case QuitMessage m1:
                 System.out.printf("Oh hell naw!!!");
-                setState("inactivo");
-                MonitorService.getInstance().notifyAllObservers("Finalization",this);
+                setState("FINALIZADO");
+                MonitorService.getInstance().notifyAllObservers(state,this);
+                send(m1);
                 exit = true;
                 break;
             default : System.out.printf("No se ha registrado");
@@ -71,4 +88,12 @@ public class Actor implements ActorInterface,Iactor{
         this.exit = exit;
     }
 
+
+    public int getTraffic() {
+        return traffic;
+    }
+
+    public void setTraffic(int traffic) {
+        this.traffic = traffic;
+    }
 }

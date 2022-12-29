@@ -22,7 +22,9 @@ public class InsultActor extends Actor {
         listaInsultos.add("taco");
         listaInsultos.add("taco2");
         listaInsultos.add("taco3");
-        MonitorService.getInstance().notifyAllObservers("Message received",this);
+        setState("RECEIVED MESSAGE");
+        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
+            MonitorService.getInstance().notifyAllObservers(getState(),this);
         switch (message){
             case AddInsultMessage m1:
                 listaInsultos.add(m1.getMessage());
@@ -38,8 +40,9 @@ public class InsultActor extends Actor {
                 break;
             case QuitMessage m1:
                 System.out.println("Oh hell naw!!!");
-                setState("inactivo");
-                MonitorService.getInstance().notifyAllObservers("Finalization",this);
+                setState("FINALIZATION INSULT");
+                if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
+                    MonitorService.getInstance().notifyAllObservers(getState(),this);
                 setExit(true);
             default:
                 break;

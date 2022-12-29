@@ -11,7 +11,9 @@ public class HelloWorldActor extends Actor{
 
     @Override
     public void process(Message m){  //en esta funcion actualizaremos estado
-        MonitorService.getInstance().notifyAllObservers("Message received",this);
+        setState("RECEIVED MESSAGE");
+        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
+            MonitorService.getInstance().notifyAllObservers(getState(),this);
         switch (m){
             case HelloWorldMessage m1:
                 System.out.println(m1.getMessage());
