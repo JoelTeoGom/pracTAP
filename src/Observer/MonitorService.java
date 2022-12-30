@@ -3,7 +3,6 @@ package Observer;
 import Estructura.Actor;
 import Estructura.ActorContext;
 import Message.Message;
-
 import java.lang.ref.PhantomReference;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -21,6 +20,7 @@ public class MonitorService{
 
     private HashMap<Event,List<String>> llistaEventsActor = new HashMap<>();    //retorna lista de nombres segun evento
 
+    private HashMap<Actor,List<String>> llistaActorEvents = new HashMap<>();
     private HashMap<Actor, List<Message>> llistaMessageActor = new HashMap<>();
 
     private HashMap<Actor, List<Message>> llistaSentMessageActor = new HashMap<>();
@@ -87,6 +87,24 @@ public class MonitorService{
 
         return llistaTraficActor;
     }
+    public HashMap<Event,List<String>> getEvent(){
+
+        List<String> created = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getState().equals("CREATED")).map(Map.Entry::getValue).toList();
+        List<String> stopped = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getState().equals("STOPPED")).map(Map.Entry::getValue).toList();
+        List<String> error = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getState().equals("ERROR")).map(Map.Entry::getValue).toList();
+
+        llistaEventsActor.put(Event.CREATED, created);
+        llistaEventsActor.put(Event.STOPPED,stopped);
+        llistaEventsActor.put(Event.ERROR,error);
+
+        return llistaEventsActor;
+    }
+
+    public void logEventsActor(Actor actor){
+        List<String> list = llistaActorEvents.get(actor);
+        list.add(actor.getState());
+        llistaActorEvents.put(actor,list);
+    }
 
     public void putSentMessage(Actor actor, Message message){
         List<Message> list = llistaSentMessageActor.get(actor);
@@ -105,6 +123,7 @@ public class MonitorService{
         llistaMessageActor.put(actor,list);
     }
 
+
     public List<Message> getNumberOfMessages(Actor actor){
         return llistaMessageActor.get(actor);
     }
@@ -116,13 +135,6 @@ public class MonitorService{
     }
 
 
-
-    private enum Traffic{
-        LOW, MEDIUM, HIGH;
-    }
-    private enum Event{
-        CREATED, STOPPED, ERROR;
-    }
 
     public HashMap<Actor, List<Observer>> getLlistaActorsObserver() {
         return llistaActorsObserver;
@@ -172,4 +184,6 @@ public class MonitorService{
     public void setLlistaReceivedMessageActor(HashMap<Actor, List<Message>> llistaReceivedMessageActor) {
         this.llistaReceivedMessageActor = llistaReceivedMessageActor;
     }
+
+
 }
