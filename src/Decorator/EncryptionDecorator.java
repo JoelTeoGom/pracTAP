@@ -9,7 +9,7 @@ import Message.Message;
     will encrypt (send) and decrypt message text (process) between
     communicating Actors
  */
-public class EncryptionDecorator extends ActorDecorator {
+public abstract class EncryptionDecorator extends ActorDecorator {
     public EncryptionDecorator (Actor actor){super(actor);}
 
     @Override

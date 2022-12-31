@@ -10,7 +10,7 @@ import java.util.function.Predicate;
 
     predicate->
  */
-public class AddClosureMessage<T> extends LambdaFirewallDecorator {
+public abstract class AddClosureMessage<T> extends LambdaFirewallDecorator {
 
     public AddClosureMessage(Actor actor) {
         super(actor);

@@ -3,6 +3,7 @@ package Decorator;
 import Message.Message;
 
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
 
 public interface ActorInterface {
 
@@ -10,14 +11,9 @@ public interface ActorInterface {
 
     public void process(Message m) throws InterruptedException;
 
-    public Queue<Message> getQueue();
+    public BlockingQueue<Message> getQueue();
 
-    public void setQueue(Queue<Message> queue);
-
-    public String getState();
-
-    public void setState(String state);
-
+    public void setQueue(BlockingQueue<Message> queue);
 
     public Boolean getExit();
 

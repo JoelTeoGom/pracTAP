@@ -2,22 +2,22 @@ package Observer;
 
 public class ActionListener implements Observer {
 
-    private String state;
+    private Event state;
 
     public ActionListener(){
         state = null;
     }
     @Override
-    public void update(String state) {
+    public void update(Event state) {
         this.state = state;
-        System.out.println(state);
+        System.out.println(state.name());
     }
 
-    public String getState() {
+    public Event getState() {
         return state;
     }
 
-    public void setState(String state) {
+    public void setState(Event state) {
         this.state = state;
     }
 }

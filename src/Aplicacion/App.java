@@ -25,9 +25,9 @@ public class App {
             p1.send(new Message(p2,"message"+i));
             i++;
         }
-
         p1.send(new QuitMessage(p2,"adios"));
         System.out.println("El mensaje es :"+p2.receive().getMessage());
+
         Thread.sleep(100);       //sleep para procesar los mensajes
         System.out.println(MonitorService.getInstance().getTraffic().toString());
 

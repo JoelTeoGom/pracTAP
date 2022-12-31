@@ -1,6 +1,6 @@
 package Observer;
 
 public enum Event {
-    CREATED, STOPPED, ERROR;
+    CREATED, STOPPED, ERROR, MESSAGE;
 
 }

@@ -17,11 +17,11 @@ public class ActorProxy implements Iactor{
         queue = new LinkedBlockingDeque<Message>();
     }
     @Override
-    public void send(Message message) {
+    public void send(Message message) throws InterruptedException {
         if(message.getFrom() == null){    //en caso que el from del mensaje este Null por default se pondra el propio proxy
             message.setFrom(this);          //asi podra responder el actor
         }
-        this.sourceActor.getQueue().add(message);
+        this.sourceActor.getQueue().put(message);
     }
 
     public Message receive() throws InterruptedException { //falta implementar

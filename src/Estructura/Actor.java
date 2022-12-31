@@ -3,49 +3,51 @@ package Estructura;
 import Decorator.ActorInterface;
 import HelloWorld.HelloWorldMessage;
 import Message.*;
+import Observer.Event;
 import Observer.MonitorService;
+import Observer.Traffic;
 
 import java.beans.EventSetDescriptor;
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingDeque;
 
 public class Actor implements ActorInterface,Iactor{
-    private Queue<Message> queue;
-    private String state;
+    private BlockingQueue<Message> queue;
+    private Event event;
     private Boolean exit;
-
     private int traffic;
-
 
     public Actor(){
         traffic = 0;
-        this.state = "CREATED";
-        queue = new LinkedList<Message>();
+        event = Event.CREATED;
+        queue = new LinkedBlockingDeque<>();
         exit = false;
-
     }
-
 
     @Override
     public void send(Message message) throws InterruptedException {
         Message m = new Message(new ActorProxy(this), message.getMessage());
         message.getFrom().getQueue().put(m);
-        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this)){
+
+        if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
             MonitorService.getInstance().putAllMessages(this,m);
             MonitorService.getInstance().putSentMessage(this,m);
         }
-        traffic++;      //nuevo mensaje generado
+        traffic++;
     }
 
 
     public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
-        System.out.println("SOY un actor padre");
-        setState("RECEIVED MESSAGE");
+        System.out.println("Soy un actor padre");
+        event = Event.MESSAGE;
 
-        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this)){
-            MonitorService.getInstance().notifyAllObservers(state,this);
+        if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
+            MonitorService.getInstance().notifyAllObservers(event,this);
             MonitorService.getInstance().putAllMessages(this,m);
             MonitorService.getInstance().putReceivedMessage(this,m);
+            MonitorService.getInstance().logEventsActor(this);
         }
 
         traffic++; //nuevo mensaje procesado
@@ -55,31 +57,27 @@ public class Actor implements ActorInterface,Iactor{
                 System.out.printf(m1.getMessage());
                 break;
             case QuitMessage m1:
-                System.out.printf("Oh hell naw!!!");
-                setState("FINALIZADO");
-                MonitorService.getInstance().notifyAllObservers(state,this);
+                System.out.println("Oh hell naw!!!");
+                event = Event.STOPPED;
+                if(MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
+                    MonitorService.getInstance().notifyAllObservers(event, this);
+                    MonitorService.getInstance().logEventsActor(this);
+                }
                 send(m1);
                 exit = true;
                 break;
-            default : System.out.printf("No se ha registrado");
+            default : System.out.print("No se ha registrado");
         }
     }
 
-
-    public Queue<Message> getQueue() {
+    @Override
+    public BlockingQueue<Message> getQueue() {
         return queue;
     }
 
-    public void setQueue(Queue<Message> queue) {
+
+    public void setQueue(BlockingQueue<Message> queue) {
         this.queue = queue;
-    }
-
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
     }
 
     public Boolean getExit() {return exit;}
@@ -96,4 +94,14 @@ public class Actor implements ActorInterface,Iactor{
     public void setTraffic(int traffic) {
         this.traffic = traffic;
     }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+
 }

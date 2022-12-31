@@ -18,7 +18,11 @@ public class Runner implements Runnable{
         Message message;
         while (!actor.getExit()) {
             if (!actor.getQueue().isEmpty()){
-                message = actor.getQueue().poll(); //FIFO y luego procesamos
+                try {
+                    message = actor.getQueue().take(); //FIFO y luego procesamos
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 try {
                     actor.process(message);    //procesamos mensajes si hay en la cola
                 } catch (InterruptedException e) {
