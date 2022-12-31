@@ -14,10 +14,10 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class Actor implements ActorInterface,Iactor{
-    private BlockingQueue<Message> queue;
-    private Event event;
-    private Boolean exit;
-    private int traffic;
+    protected BlockingQueue<Message> queue;
+    protected Event event;
+    protected Boolean exit;
+    protected int traffic;
 
     public Actor(){
         traffic = 0;
@@ -41,7 +41,9 @@ public class Actor implements ActorInterface,Iactor{
 
     public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
         System.out.println("Soy un actor padre");
+
         event = Event.MESSAGE;
+        traffic++; //nuevo mensaje procesado
 
         if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
             MonitorService.getInstance().notifyAllObservers(event,this);
@@ -50,23 +52,19 @@ public class Actor implements ActorInterface,Iactor{
             MonitorService.getInstance().logEventsActor(this);
         }
 
-        traffic++; //nuevo mensaje procesado
-
-        switch (m){
-            case HelloWorldMessage m1:
-                System.out.printf(m1.getMessage());
-                break;
-            case QuitMessage m1:
+        switch (m) {
+            case HelloWorldMessage m1 -> System.out.printf(m1.getMessage());
+            case QuitMessage m1 -> {
                 System.out.println("Oh hell naw!!!");
                 event = Event.STOPPED;
-                if(MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
+                if (MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
                     MonitorService.getInstance().notifyAllObservers(event, this);
                     MonitorService.getInstance().logEventsActor(this);
                 }
                 send(m1);
                 exit = true;
-                break;
-            default : System.out.print("No se ha registrado");
+            }
+            default -> System.out.print("No se ha registrado");
         }
     }
 

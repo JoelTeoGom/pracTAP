@@ -11,9 +11,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class ActorProxy implements Iactor{
 
     private BlockingQueue<Message> queue;
-    private final ActorInterface sourceActor;
+    private final Actor sourceActor;
 
-    public ActorProxy(ActorInterface sourceActor){
+    public ActorProxy(Actor sourceActor){
         this.sourceActor = sourceActor;     //referencia del actor que le pertoca al proxy
         queue = new LinkedBlockingDeque<Message>();
     }
@@ -37,7 +37,7 @@ public class ActorProxy implements Iactor{
         this.queue = queue;
     }
 
-    public ActorInterface getSourceActor() {
+    public Actor getSourceActor() {
         return sourceActor;
     }
 }

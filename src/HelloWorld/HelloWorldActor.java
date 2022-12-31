@@ -13,22 +13,30 @@ public class HelloWorldActor extends Actor{
     @Override
     public void process(Message m){  //en esta funcion actualizaremos estado
 
-        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
-            MonitorService.getInstance().notifyAllObservers(getEvent(),this);
-        switch (m){
-            case HelloWorldMessage m1:
+        event = Event.MESSAGE;
+        traffic++;
+
+        if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
+            MonitorService.getInstance().notifyAllObservers(event,this);
+            MonitorService.getInstance().putAllMessages(this,m);
+            MonitorService.getInstance().putReceivedMessage(this,m);
+            MonitorService.getInstance().logEventsActor(this);
+        }
+
+        switch (m) {
+            case HelloWorldMessage m1 -> {
                 System.out.println(m1.getMessage());
-                MonitorService.getInstance().notifyAllObservers(getEvent(),this);
-                break;
-            case QuitMessage m1:
-                this.setEvent(Event.STOPPED);
+            }
+            case QuitMessage m1 -> {
+                System.out.println("Oh hell naw!!!");
+                event = Event.STOPPED;
                 if(MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
-                    MonitorService.getInstance().notifyAllObservers(this.getEvent(), this);
+                    MonitorService.getInstance().notifyAllObservers(event, this);
                     MonitorService.getInstance().logEventsActor(this);
                 }
-                setExit(true);
-                break;
-            default : System.out.printf("No se ha registrado");
+                exit = true;
+            }
+            default -> System.out.print("No se ha registrado");
         }
 
     }

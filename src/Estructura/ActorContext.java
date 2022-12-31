@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ActorContext {
     private static final ActorContext actorContext = new ActorContext();
-    private final HashMap<String,ActorInterface> actorLibrary = new HashMap<>();
+    private final HashMap<String,Actor> actorLibrary = new HashMap<>();
 
 
     private ActorContext(){}
@@ -16,7 +16,7 @@ public class ActorContext {
         return actorContext;
     }
 
-    public ActorProxy spawnActor(String name, ActorInterface actor){
+    public ActorProxy spawnActor(String name, Actor actor){
         ActorProxy actorProxy = new ActorProxy(actor);
         Runner runner = new Runner(actor);
         this.actorLibrary.put(name,actor);
@@ -35,7 +35,7 @@ public class ActorContext {
        return actorLibrary.containsKey(actor);
     }
 
-    public HashMap<String, ActorInterface> getActorLibrary() {
+    public HashMap<String, Actor> getActorLibrary() {
         return actorLibrary;
     }
 }

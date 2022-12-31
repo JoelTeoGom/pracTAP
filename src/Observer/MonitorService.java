@@ -147,6 +147,9 @@ public class MonitorService{
     public List<Message> getReceivedMessages(Actor actor){
         return llistaReceivedMessageActor.get(actor);
     }
+    public List<String> getEventsActor(Actor actor){
+        return llistaActorEvents.get(actor);
+    }
     public HashMap<Actor, List<Observer>> getLlistaActorsObserver() {
         return llistaActorsObserver;
     }

@@ -19,19 +19,26 @@ public class InsultActor extends Actor {
 
 
     @Override
-    public void process(Message message) throws InterruptedException {
+    public void process(Message m) throws InterruptedException {
         listaInsultos.add("taco");
         listaInsultos.add("taco2");
         listaInsultos.add("taco3");
-        setEvent(Event.MESSAGE);
-        if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
-            MonitorService.getInstance().notifyAllObservers(getEvent(),this);
-        switch (message){
+
+        event = Event.MESSAGE;
+        traffic++;
+
+        if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
+            MonitorService.getInstance().notifyAllObservers(event,this);
+            MonitorService.getInstance().putAllMessages(this,m);
+            MonitorService.getInstance().putReceivedMessage(this,m);
+            MonitorService.getInstance().logEventsActor(this);
+        }
+        switch (m){
             case AddInsultMessage m1:
                 listaInsultos.add(m1.getMessage());
                 break;
             case GetInsultMessage m1:
-                int numeroAleatorio = (int) (Math.random()*(listaInsultos.size()-1)+0);
+                int numeroAleatorio = (int) (Math.random()*(listaInsultos.size())+0);
                 m1.setMessage(listaInsultos.get(numeroAleatorio));
                 send(m1);
                 break;
@@ -41,10 +48,12 @@ public class InsultActor extends Actor {
                 break;
             case QuitMessage m1:
                 System.out.println("Oh hell naw!!!");
-
-                if(MonitorService.getInstance().getLlistaActorsObserver().containsKey(this))
-                    MonitorService.getInstance().notifyAllObservers(getEvent(),this);
-                setExit(true);
+                event = Event.STOPPED;
+                if(MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
+                    MonitorService.getInstance().notifyAllObservers(event, this);
+                    MonitorService.getInstance().logEventsActor(this);
+                }
+                exit = true;
             default:
                 break;
         }
