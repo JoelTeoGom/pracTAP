@@ -6,7 +6,7 @@ import Message.Message;
 import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 
-public abstract class ActorDecorator implements ActorInterface{
+public class ActorDecorator implements ActorInterface{
     protected Actor actor;
 
     public ActorDecorator(Actor actor){
@@ -18,7 +18,10 @@ public abstract class ActorDecorator implements ActorInterface{
         return this.actor.getQueue();
     }
 
-
+    @Override
+    public void setQueue(BlockingQueue<Message> queue) {
+        this.actor.setQueue(queue);
+    }
 
 
     @Override

@@ -9,7 +9,7 @@ import Message.Message;
     will encrypt (send) and decrypt message text (process) between
     communicating Actors
  */
-public abstract class EncryptionDecorator extends ActorDecorator {
+public class EncryptionDecorator extends ActorDecorator {
     public EncryptionDecorator (Actor actor){super(actor);}
 
     @Override
@@ -20,6 +20,7 @@ public abstract class EncryptionDecorator extends ActorDecorator {
             chars[i] -= 5;
         }
         message.setMessage(String.valueOf(chars));
+        System.out.println("missatge encriptat"+message);
         super.send(message);
 
     }
@@ -29,9 +30,11 @@ public abstract class EncryptionDecorator extends ActorDecorator {
         String text = m.getMessage();
         char[] chars = text.toCharArray();
         for (int i=0;i<chars.length;i++){
-            chars[i] -= 5;
+            chars[i] += 5;
         }
+
         m.setMessage(String.valueOf(chars));
+        System.out.println("missatge encriptat"+m);
         super.process(m);
     }
 }

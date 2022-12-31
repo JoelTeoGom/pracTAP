@@ -1,12 +1,14 @@
 package Estructura;
 
+import Decorator.ActorInterface;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class ActorContext {
     private static final ActorContext actorContext = new ActorContext();
-    private final HashMap<String,Actor> actorLibrary = new HashMap<>();
+    private final HashMap<String,ActorInterface> actorLibrary = new HashMap<>();
 
 
     private ActorContext(){}
@@ -14,7 +16,7 @@ public class ActorContext {
         return actorContext;
     }
 
-    public ActorProxy spawnActor(String name, Actor actor){
+    public ActorProxy spawnActor(String name, ActorInterface actor){
         ActorProxy actorProxy = new ActorProxy(actor);
         Runner runner = new Runner(actor);
         this.actorLibrary.put(name,actor);
@@ -29,11 +31,11 @@ public class ActorContext {
         return new ArrayList<>(actorLibrary.keySet());
     }
 
-    public boolean isThere(Actor actor){
+    public boolean isThere(ActorInterface actor){
        return actorLibrary.containsKey(actor);
     }
 
-    public HashMap<String, Actor> getActorLibrary() {
+    public HashMap<String, ActorInterface> getActorLibrary() {
         return actorLibrary;
     }
 }

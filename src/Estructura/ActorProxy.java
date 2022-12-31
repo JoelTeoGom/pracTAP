@@ -1,5 +1,6 @@
 package Estructura;
 
+import Decorator.ActorInterface;
 import Message.*;
 
 import java.util.LinkedList;
@@ -10,9 +11,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 public class ActorProxy implements Iactor{
 
     private BlockingQueue<Message> queue;
-    private final Actor sourceActor;
+    private final ActorInterface sourceActor;
 
-    public ActorProxy(Actor sourceActor){
+    public ActorProxy(ActorInterface sourceActor){
         this.sourceActor = sourceActor;     //referencia del actor que le pertoca al proxy
         queue = new LinkedBlockingDeque<Message>();
     }
@@ -36,7 +37,7 @@ public class ActorProxy implements Iactor{
         this.queue = queue;
     }
 
-    public Actor getSourceActor() {
+    public ActorInterface getSourceActor() {
         return sourceActor;
     }
 }

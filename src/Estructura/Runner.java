@@ -1,13 +1,14 @@
 package Estructura;
 
+import Decorator.ActorInterface;
 import Message.Message;
 
 public class Runner implements Runnable{
 
     private Thread thread;
-    private Actor actor;
+    private ActorInterface actor;
 
-    public Runner(Actor actor){
+    public Runner(ActorInterface actor){
         this.actor = actor;
         thread = new Thread(this);
         thread.start();
@@ -40,7 +41,7 @@ public class Runner implements Runnable{
         this.thread = thread;
     }
 
-    public Actor getActor() {
+    public ActorInterface getActor() {
         return actor;
     }
 
