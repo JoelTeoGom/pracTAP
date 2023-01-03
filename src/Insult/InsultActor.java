@@ -20,9 +20,9 @@ public class InsultActor extends Actor {
 
     @Override
     public void process(Message m) throws InterruptedException {
-        listaInsultos.add("taco");
-        listaInsultos.add("taco2");
-        listaInsultos.add("taco3");
+//        listaInsultos.add("taco");
+//        listaInsultos.add("taco2");
+//        listaInsultos.add("taco3");
 
         event = Event.MESSAGE;
         traffic++;

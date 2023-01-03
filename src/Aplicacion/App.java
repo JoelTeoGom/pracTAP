@@ -34,7 +34,7 @@ public class App {
         MonitorService.getInstance().getReceivedMessages(p1.getSourceActor()).forEach(m -> System.out.println(m.getMessage()));
         MonitorService.getInstance().getNumberOfMessages(p1.getSourceActor()).forEach(m -> System.out.println(m.getMessage()));
         MonitorService.getInstance().getSentMessages(p1.getSourceActor()).forEach(m -> System.out.println(m.getMessage()));
-        MonitorService.getInstance().getEventsActor(p1.getSourceActor()).toString();
+        MonitorService.getInstance().getEventsActor(p1.getSourceActor()).forEach(e -> System.out.println(e.toString()));
 //        ActorProxy insult = ActorContext.getInstance().spawnActor("ACTOR",new InsultActor());
 //        ActorProxy hello = ActorContext.getInstance().spawnActor("HELLO", new HelloWorldActor());
 //
