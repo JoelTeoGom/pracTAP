@@ -1,12 +1,8 @@
 package Aplicacion;
 
-import Decorator.FirewallDecorator;
 import Estructura.Actor;
 import Estructura.ActorContext;
 import Estructura.ActorProxy;
-import HelloWorld.HelloWorldActor;
-import HelloWorld.HelloWorldMessage;
-import Insult.*;
 import Message.*;
 import Observer.*;
 
