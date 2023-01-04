@@ -6,9 +6,9 @@ import Message.Message;
 public class Runner implements Runnable{
 
     private Thread thread;
-    private ActorInterface actor;
+    private Actor actor;
 
-    public Runner(ActorInterface actor){
+    public Runner(Actor actor){
         this.actor = actor;
         thread = new Thread(this);
         thread.start();
@@ -41,7 +41,7 @@ public class Runner implements Runnable{
         this.thread = thread;
     }
 
-    public ActorInterface getActor() {
+    public Actor getActor() {
         return actor;
     }
 

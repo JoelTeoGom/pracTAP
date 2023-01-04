@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class Actor implements ActorInterface,Iactor{
+public class Actor implements Iactor{
     protected BlockingQueue<Message> queue;
     protected Event event;
     protected Boolean exit;
@@ -68,7 +68,7 @@ public class Actor implements ActorInterface,Iactor{
         }
     }
 
-    @Override
+
     public BlockingQueue<Message> getQueue() {
         return queue;
     }
