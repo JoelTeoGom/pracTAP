@@ -1,6 +1,6 @@
 package Estructura;
 
-import Decorator.ActorInterface;
+
 import Message.*;
 
 import java.util.LinkedList;

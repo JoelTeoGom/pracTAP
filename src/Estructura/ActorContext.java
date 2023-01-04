@@ -1,6 +1,5 @@
 package Estructura;
 
-import Decorator.ActorInterface;
 
 import java.util.ArrayList;
 import java.util.HashMap;
