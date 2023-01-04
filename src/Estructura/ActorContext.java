@@ -22,6 +22,12 @@ public class ActorContext {
         return actorProxy;
     }
 
+    public ActorProxy spawnActor2(String name, Actor actor){
+        ActorProxy actorProxy = new ActorProxy(actor);
+        Runner runner = new Runner(actor);
+        return actorProxy;
+    }
+
     public ActorProxy lookup(String name){
         return new ActorProxy(this.actorLibrary.get(name));
     }
