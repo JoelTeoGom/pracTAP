@@ -1,6 +1,6 @@
 package Estructura;
 
-import Decorator.ActorInterface;
+
 import HelloWorld.HelloWorldMessage;
 import Message.*;
 import Observer.Event;
