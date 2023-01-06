@@ -12,12 +12,17 @@ public class InsultActor extends Actor {
 
     private List<String> listaInsultos = new ArrayList<>();
 
-
+    /**
+     * constructor InsultActor
+     */
     public InsultActor() {
         super();
     }
 
-
+    /**
+     * metode process: mirem quin tipus de classe insult es i actuem depenent d'aquesta
+     * @param m
+     */
     @Override
     public void process(Message m) throws InterruptedException {
 //        listaInsultos.add("taco");

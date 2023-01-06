@@ -10,6 +10,10 @@ public class HelloWorldActor extends Actor{
         super();
     }
 
+    /**
+     * metode process: mirem quin tipus de missatge i actuem depenent d'aquest
+     * @param m
+     */
     @Override
     public void process(Message m){  //en esta funcion actualizaremos estado
 

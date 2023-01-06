@@ -6,6 +6,7 @@ import Message.Message;
 public class InsultService implements Iservice{
 
     /**
+     * Afegeix insult
      * @param insult
      * @throws InterruptedException
      */
@@ -15,7 +16,7 @@ public class InsultService implements Iservice{
     }
 
     /**
-     * @return
+     * agafa els insults
      * @throws InterruptedException
      */
     @Override
@@ -24,7 +25,7 @@ public class InsultService implements Iservice{
     }
 
     /**
-     * @return
+     * retorna insult
      */
     @Override
     public String getInsult() {

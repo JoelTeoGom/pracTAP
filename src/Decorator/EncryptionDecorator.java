@@ -3,15 +3,24 @@ package Decorator;
 import Estructura.Actor;
 import Message.Message;
 
-
-
-/*
-    will encrypt (send) and decrypt message text (process) between
-    communicating Actors
+/**
+ * will encrypt (send) and decrypt message text (process) between
+ *     communicating Actors
  */
+
+
 public class EncryptionDecorator extends ActorDecorator {
+    /**
+     * Constructor
+     * @param actor
+     */
     public EncryptionDecorator (Actor actor){super(actor);}
 
+    /**
+     * Encripta el missatge
+     * @param message misstage
+     * @throws InterruptedException
+     */
     @Override
     public void send(Message message) throws InterruptedException {
         String text = message.getMessage();
@@ -25,6 +34,11 @@ public class EncryptionDecorator extends ActorDecorator {
 
     }
 
+    /**
+     * Desencripta el missatge
+     * @param m misstage
+     * @throws InterruptedException
+     */
     @Override
     public void process(Message m) throws InterruptedException {
         String text = m.getMessage();
