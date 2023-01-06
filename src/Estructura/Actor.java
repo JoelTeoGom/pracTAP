@@ -53,7 +53,10 @@ public class Actor implements Iactor{
         }
 
         switch (m) {
-            case HelloWorldMessage m1 -> System.out.printf(m1.getMessage());
+            case HelloWorldMessage m1 -> {
+                    System.out.printf(m1.getMessage());
+                  //  send(m1);
+            }
             case QuitMessage m1 -> {
                 System.out.println("Oh hell naw!!!");
                 event = Event.STOPPED;
