@@ -44,6 +44,9 @@ public class ActorContext {
         return actorProxy;
     }
 
+    public ActorProxy lookup(String name){
+        return new ActorProxy(actorLibrary.get(name));
+    }
 
 
     /**
