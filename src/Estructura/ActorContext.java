@@ -1,6 +1,8 @@
 package Estructura;
 
 
+import Observer.MonitorService;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,6 +32,7 @@ public class ActorContext {
         ActorProxy actorProxy = new ActorProxy(actor);
         Runner runner = new Runner(actor);
         this.actorLibrary.put(name,actor);
+        MonitorService.getInstance().monitorActor(name);
         return actorProxy;
     }
     /**
