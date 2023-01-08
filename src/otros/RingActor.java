@@ -14,12 +14,11 @@ public class RingActor extends Actor {
 
     @Override
     public void process(Message message) throws InterruptedException {
-        System.out.println(message.getMessage());
+        //System.out.println(message.getMessage());
         if(message.getFrom().getSourceActor().equals(this)){
             System.out.println("Fin de la vuelta "+ Integer.parseInt(message.getMessage()));
         }else
             next.send(message);
-
     }
 
     public ActorProxy getNext() {

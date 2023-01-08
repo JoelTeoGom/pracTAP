@@ -33,10 +33,15 @@ public class App {
             i++;
         }
 
+        long start = System.currentTimeMillis();
         for (i = 1; i<=100; i++){
             RingActor inicial = ring.get(1);
             inicial.process(new Message(ActorContext.getInstance().lookup("Primero"),""+i ));
         }
+
+        long end = System.currentTimeMillis();
+        double total = (double) (end - start) / 1000;
+        System.out.println("Total time: "+total+"s");
 
 
 //        ActorProxy p1 = ActorContext.getInstance().spawnActor("Actor1", new Actor());

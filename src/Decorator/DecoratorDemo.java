@@ -3,7 +3,7 @@ package Decorator;
 import Estructura.*;
 import HelloWorld.*;
 
-public class decoratorDemo {
+public class DecoratorDemo {
 
     public static void main(String[] args) throws InterruptedException {
         ActorProxy p1 = ActorContext.getInstance().spawnActor("Actor1",new FirewallDecorator(new Actor()));
