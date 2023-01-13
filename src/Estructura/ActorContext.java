@@ -10,7 +10,7 @@ import java.util.List;
 public class ActorContext {
     private static final ActorContext actorContext = new ActorContext();
     private final HashMap<String,Actor> actorLibrary = new HashMap<>();
-
+    private final HashMap<Actor,Thread> actorThreadHashMap = new HashMap<>();
 
     private ActorContext(){}
 
@@ -31,8 +31,10 @@ public class ActorContext {
     public ActorProxy spawnActor(String name, Actor actor){
         ActorProxy actorProxy = new ActorProxy(actor);
         Runner runner = new Runner(actor);
-        this.actorLibrary.put(name,actor);
+        actorLibrary.put(name,actor);
+        actorThreadHashMap.put(actor,runner.getThread());
         MonitorService.getInstance().monitorActor(name);
+
         return actorProxy;
     }
     /**
@@ -58,6 +60,10 @@ public class ActorContext {
      */
     public List<String> getNames(){
         return new ArrayList<>(actorLibrary.keySet());
+    }
+
+    public HashMap<Actor, Thread> getActorThreadHashMap() {
+        return actorThreadHashMap;
     }
 
     /**

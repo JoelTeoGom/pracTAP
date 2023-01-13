@@ -2,6 +2,7 @@ package Estructura;
 
 
 import Message.*;
+import otros.PimPomMessage;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -42,7 +43,11 @@ public class ActorProxy implements Iactor{
      * @throws InterruptedException
      */
     public Message receive() throws InterruptedException { //falta implementar
-        return queue.take();
+        Message m = queue.take();
+        if(m instanceof PimPomMessage){
+            this.send(m);
+        }
+        return m;
     }
 
     /**

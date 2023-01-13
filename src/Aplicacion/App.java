@@ -10,6 +10,7 @@ import Message.*;
 import Observer.*;
 import otros.RingActor;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 
@@ -20,6 +21,7 @@ public class App {
 //        insult.send(new GetInsultMessage(null));
 //        Message result = insult.receive();
 //        System.out.println(result.getMessage());
+
         ArrayList<RingActor> ring = new ArrayList<>();
         ring.add(0,new RingActor());
         int i = 1;
@@ -32,16 +34,22 @@ public class App {
                 actual.setNext(ActorContext.getInstance().spawnActor("Primero",ring.get(0)));
             i++;
         }
-
+        System.out.println("EMPIEZA EL TIEMPO");
         long start = System.currentTimeMillis();
         for (i = 1; i<=100; i++){
             RingActor inicial = ring.get(1);
             inicial.process(new Message(ActorContext.getInstance().lookup("Primero"),""+i ));
         }
 
+        for (Actor actor : ActorContext.getInstance().getActorThreadHashMap().keySet()) {
+            Thread thread = ActorContext.getInstance().getActorThreadHashMap().get(actor);
+            thread.join();
+        }
+
         long end = System.currentTimeMillis();
         double total = (double) (end - start) / 1000;
         System.out.println("Total time: "+total+"s");
+
 
 
 //        ActorProxy p1 = ActorContext.getInstance().spawnActor("Actor1", new Actor());
