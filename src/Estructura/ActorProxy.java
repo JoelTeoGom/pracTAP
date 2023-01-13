@@ -43,11 +43,7 @@ public class ActorProxy implements Iactor{
      * @throws InterruptedException
      */
     public Message receive() throws InterruptedException { //falta implementar
-        Message m = queue.take();
-        if(m instanceof PimPomMessage){
-            this.send(m);
-        }
-        return m;
+        return queue.take();
     }
 
     /**

@@ -14,8 +14,8 @@ import java.lang.reflect.Proxy;
 
 public class DynamicProxy implements InvocationHandler {
 
-    private Object target = null;
-    private ActorProxy actorProxy = null;
+    private Object target;
+    private ActorProxy actorProxy;
 
     /**
      *  metode static que fa una nova instancia del objecte

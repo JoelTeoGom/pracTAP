@@ -19,7 +19,6 @@ public class FirewallDecorator extends ActorDecorator {
 
     }
 
-
     /**
      * Aquest metode deixarà processar el missatge si aquest es un actor del actorContext.
      * @param m
