@@ -1,4 +1,4 @@
-package otros;
+package RingActor;
 
 import Estructura.*;
 import HelloWorld.*;

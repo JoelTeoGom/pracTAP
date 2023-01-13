@@ -1,4 +1,4 @@
-package otros;
+package PimPom;
 
 import Estructura.ActorProxy;
 import Message.Message;

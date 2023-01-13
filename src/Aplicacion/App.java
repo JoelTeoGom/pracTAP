@@ -2,15 +2,9 @@ package Aplicacion;
 
 import Estructura.Actor;
 import Estructura.ActorContext;
-import Estructura.ActorProxy;
-import Insult.AddInsultMessage;
-import Insult.GetInsultMessage;
-import Insult.InsultActor;
 import Message.*;
-import Observer.*;
-import otros.RingActor;
+import RingActor.RingActor;
 
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 

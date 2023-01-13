@@ -97,7 +97,6 @@ public class MonitorService{
     public void unsubscribe(String name, Observer observer){   //falta comprovar si esta suscrito ( excpeciones)
         Actor actor = ActorContext.getInstance().getActorLibrary().get(name);
         List<Observer> observerList = llistaActorsObserver.get(actor);
-        observer.update(null);              //le borramos el estado ya que no esta suscrito anymore
         observerList.remove(observer);
         llistaActorsObserver.put(actor,observerList);
     }

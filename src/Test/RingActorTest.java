@@ -2,20 +2,11 @@ package Test;
 
 import Estructura.Actor;
 import Estructura.ActorContext;
-import Estructura.ActorProxy;
-import HelloWorld.HelloWorldActor;
-import HelloWorld.HelloWorldMessage;
-import Insult.InsultActor;
 import Message.Message;
 import org.junit.jupiter.api.Test;
-import otros.RingActor;
+import RingActor.RingActor;
 
-import java.lang.reflect.Proxy;
 import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class RingActorTest {
 

@@ -1,15 +1,17 @@
-package otros;
+package Test;
 
 import Estructura.ActorContext;
 import Estructura.ActorProxy;
+import org.junit.jupiter.api.Test;
+import PimPom.PimPomActor;
+import PimPom.PimPomMessage;
 
-public class PimPomMain {
-    public static void main(String[] args) throws InterruptedException {
+class PimPomActorTest {
+
+    @Test
+    void PimPomActorProcess() throws InterruptedException {
         ActorProxy pim = ActorContext.getInstance().spawnActor("Pim",new PimPomActor());
         ActorProxy pom = ActorContext.getInstance().spawnActor("Pom",new PimPomActor());
-
         pim.send(new PimPomMessage(pom,"5"));
-        System.out.println("/n "+pim.receive().getMessage());
-
     }
 }

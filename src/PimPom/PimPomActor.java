@@ -1,7 +1,6 @@
-package otros;
+package PimPom;
 
 import Estructura.Actor;
-import Estructura.ActorContext;
 import Estructura.ActorProxy;
 import Message.Message;
 
