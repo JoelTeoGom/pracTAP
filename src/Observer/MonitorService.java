@@ -14,16 +14,11 @@ public class MonitorService{
 
     //list section
     private final HashMap<Actor,String> monitoredActor = new HashMap<>();
-
     private final HashMap<Actor,List<Observer>> llistaActorsObserver = new HashMap<>();
-
     private final HashMap<Traffic,List<String>> llistaTraficActor = new HashMap<>();
-
     private final HashMap<Event,List<String>> llistaEventsActor = new HashMap<>();
-
-    private final HashMap<Actor,List<String>> llistaActorEvents = new HashMap<>();
+    private final HashMap<Actor,List<Event>> llistaActorEvents = new HashMap<>();
     private final HashMap<Actor, List<Message>> llistaMessageActor = new HashMap<>();
-
     private final HashMap<Actor, List<Message>> llistaSentMessageActor = new HashMap<>();
     private final HashMap<Actor, List<Message>> llistaReceivedMessageActor = new HashMap<>();
 
@@ -84,7 +79,7 @@ public class MonitorService{
     public void subscribe(String name, Observer observer){     //falta comprovar si esta suscrito ( excpeciones)
         Actor actor = ActorContext.getInstance().getActorLibrary().get(name);
         List<Observer> observerList = llistaActorsObserver.get(actor);
-        observer.update(actor.getEvent());                  //le ponemos el estado de created
+        observer.update(Event.CREATED);                  //le ponemos el estado de created
         observerList.add(observer);
         llistaActorsObserver.put(actor,observerList);
     }
@@ -121,13 +116,18 @@ public class MonitorService{
      */
     public HashMap<Traffic,List<String>> getTraffic(){
 
-        List<String> low = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getTraffic()<= 5).map(Map.Entry::getValue).toList();
-        List<String> med = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getTraffic() >5 && actor.getKey().getTraffic() < 15).map(Map.Entry::getValue).toList();
-        List<String> high = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getTraffic() >= 15).map(Map.Entry::getValue).toList();
+        List<String> low = monitoredActor.entrySet().stream().filter(actor -> llistaMessageActor.get(actor).size() <= 5).map(Map.Entry::getValue).toList();
+        List<String> med = monitoredActor.entrySet().stream().filter(actor -> llistaMessageActor.get(actor).size() >5 && llistaMessageActor.get(actor).size() < 15).map(Map.Entry::getValue).toList();
+        List<String> high = monitoredActor.entrySet().stream().filter(actor -> llistaMessageActor.get(actor).size() >= 15).map(Map.Entry::getValue).toList();
 
         llistaTraficActor.put(Traffic.LOW, low);
         llistaTraficActor.put(Traffic.MEDIUM,med);
         llistaTraficActor.put(Traffic.HIGH,high);
+
+//        for(Actor actor: monitoredActor.keySet()){
+//            int size = llistaMessageActor.get(actor).size();
+//            switch ()
+//        }
 
         return llistaTraficActor;
     }
@@ -139,17 +139,12 @@ public class MonitorService{
      * @return HashMap<Event,List<String>>
      */
     public HashMap<Event,List<String>> getEvent(){
-
-        List<String> created = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getEvent().equals(Event.CREATED)).map(Map.Entry::getValue).toList();
-        List<String> stopped = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getEvent().equals(Event.STOPPED)).map(Map.Entry::getValue).toList();
-        List<String> error = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getEvent().equals(Event.ERROR)).map(Map.Entry::getValue).toList();
-        List<String> message = monitoredActor.entrySet().stream().filter(actor -> actor.getKey().getEvent().equals(Event.MESSAGE)).map(Map.Entry::getValue).toList();
-
-        llistaEventsActor.put(Event.CREATED, created);
-        llistaEventsActor.put(Event.STOPPED,stopped);
-        llistaEventsActor.put(Event.ERROR,error);
-        llistaEventsActor.put(Event.MESSAGE,message);
-
+        for (Actor actor: monitoredActor.keySet()){
+            Event ev = llistaActorEvents.get(actor).get(llistaActorEvents.size()-1);
+            List<String> list = llistaEventsActor.get(ev);
+            list.add(monitoredActor.get(actor));
+            llistaEventsActor.put(ev,list);
+        }
         return llistaEventsActor;
     }
 
@@ -157,12 +152,11 @@ public class MonitorService{
      *
      * @param actor
      */
-    public void logEventsActor(Actor actor){
-        List<String> list = llistaActorEvents.get(actor);
-        list.add(actor.getEvent().name());
+    public void logEventsActor(Actor actor,Event event){
+        List<Event> list = llistaActorEvents.get(actor);
+        list.add(event);
         llistaActorEvents.put(actor,list);
     }
-
 
     //Message log section
 
@@ -199,6 +193,30 @@ public class MonitorService{
         llistaMessageActor.put(actor,list);
     }
 
+
+    public void publish(Event event, Actor actor,Message m){
+        if(monitoredActor.containsKey(actor)) {
+            switch (event) {
+                case SEND -> {
+                    notifyAllObservers(event,actor);
+                    putAllMessages(actor,m);
+                    putSentMessage(actor,m);
+                    logEventsActor(actor,event);
+                }
+                case RECEIVE -> {
+                    notifyAllObservers(event,actor);
+                    putAllMessages(actor,m);
+                    putReceivedMessage(actor,m);
+                    logEventsActor(actor,event);
+                }
+                case CREATED, STOPPED, ERROR -> {
+                    MonitorService.getInstance().notifyAllObservers(event, actor);
+                    MonitorService.getInstance().logEventsActor(actor,event);
+                }
+            }
+        }
+    }
+
     /**
      *  getter del nombre de misstages
      * @param actor
@@ -231,7 +249,7 @@ public class MonitorService{
      * @param actor
      * @return List<Message>
      */
-    public List<String> getEventsActor(Actor actor){
+    public List<Event> getEventsActor(Actor actor){
         return llistaActorEvents.get(actor);
     }
 

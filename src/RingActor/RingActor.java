@@ -21,7 +21,7 @@ public class RingActor extends Actor {
             next.send(message);
 
         if(Integer.parseInt(message.getMessage()) == 100){
-            ActorContext.getInstance().getActorThreadHashMap().get(this).stop();    //No hay manera limpia de parar un thread
+            this.exit = true;    //No hay manera limpia de parar un thread
         }
 
     }

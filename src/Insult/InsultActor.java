@@ -1,6 +1,7 @@
 package Insult;
 
 import Estructura.Actor;
+import Estructura.ActorProxy;
 import Message.*;
 import Observer.Event;
 import Observer.MonitorService;
@@ -25,42 +26,30 @@ public class InsultActor extends Actor {
      */
     @Override
     public void process(Message m) throws InterruptedException {
-//        listaInsultos.add("taco");
-//        listaInsultos.add("taco2");
-//        listaInsultos.add("taco3");
-
-        event = Event.MESSAGE;
-        traffic++;
-
-        if(MonitorService.getInstance().getMonitoredActor().containsKey(this)){
-            MonitorService.getInstance().notifyAllObservers(event,this);
-            MonitorService.getInstance().putAllMessages(this,m);
-            MonitorService.getInstance().putReceivedMessage(this,m);
-            MonitorService.getInstance().logEventsActor(this);
-        }
+        Message message = null;
+        MonitorService.getInstance().publish(Event.RECEIVE,this,m);
         switch (m){
             case AddInsultMessage m1:
                 listaInsultos.add(m1.getMessage());
                 break;
             case GetInsultMessage m1:
                 int numeroAleatorio = (int) (Math.random()*(listaInsultos.size())+0);
-                m1.setMessage(listaInsultos.get(numeroAleatorio));
-                send(m1);
+                message = new Message(new ActorProxy(this), listaInsultos.get(numeroAleatorio));
+                MonitorService.getInstance().publish(Event.SEND,this,message);
+                m1.getFrom().getQueue().put(message);
                 break;
             case GetAllInsultMessage m1:
-                m1.setMessage(listaInsultos.toString());
-                send(m1);
+                message = new Message(new ActorProxy(this),listaInsultos.toString());
+                MonitorService.getInstance().publish(Event.SEND,this,message);
+                m1.getFrom().getQueue().put(message);
                 break;
             case QuitMessage m1:
+                MonitorService.getInstance().publish(Event.STOPPED,this,m);
                 System.out.println("Oh hell naw!!!");
-                event = Event.STOPPED;
-                if(MonitorService.getInstance().getMonitoredActor().containsKey(this)) {
-                    MonitorService.getInstance().notifyAllObservers(event, this);
-                    MonitorService.getInstance().logEventsActor(this);
-                }
                 exit = true;
-            default:
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + m);
         }
 
 

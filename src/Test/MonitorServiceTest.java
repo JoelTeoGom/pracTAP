@@ -51,13 +51,14 @@ class MonitorServiceTest {
     @Test
     void notifyAllObservers() throws InterruptedException {
 
-        ActorProxy insult = ActorContext.getInstance().spawnActor("ACTOR",new Actor());
+        ActorProxy insult = ActorContext.getInstance().spawnActor("ACTOR",new InsultActor());
 
         MonitorService.getInstance().subscribe("ACTOR",new ActionListener());
         MonitorService.getInstance().subscribe("ACTOR",new ActionListener());
         MonitorService.getInstance().subscribe("ACTOR",new ActionListener());
 
         insult.send(new AddInsultMessage(null,"stupid"));
+        insult.send(new GetInsultMessage(null));
         insult.send(new QuitMessage(null, "ADIOS"));
     }
 }

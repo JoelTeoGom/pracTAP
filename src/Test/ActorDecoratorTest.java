@@ -28,10 +28,10 @@ class ActorDecoratorTest {
         p2.getSourceActor().send(new HelloWorldMessage(p,h));
         p2.getSourceActor().process(new HelloWorldMessage(p,p.receive().getMessage()));
 
-        p3.getSourceActor().send(new HelloWorldMessage(p,h));
+        //p3.getSourceActor().send(new HelloWorldMessage(p,h));
 
-        p1.getSourceActor().process(new HelloWorldMessage(p,h));
+        //p1.getSourceActor().process(new HelloWorldMessage(p,h));
 
-        p1.getSourceActor().process(new HelloWorldMessage(p2,h));
+        //p1.getSourceActor().process(new HelloWorldMessage(p2,h));
     }
 }

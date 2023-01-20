@@ -7,15 +7,13 @@ import Insult.GetInsultMessage;
 import Message.Message;
 
 import java.lang.annotation.Target;
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Proxy;
+import java.lang.reflect.*;
 
 public class DynamicProxy implements InvocationHandler {
 
     private Object target;
     private ActorProxy actorProxy;
+
 
     /**
      *  metode static que fa una nova instancia del objecte
@@ -64,23 +62,12 @@ public class DynamicProxy implements InvocationHandler {
         Object invocationResult = null;
         try
         {
-            switch (method.getName()){
-                case "addInsult":
-                    actorProxy.send(new AddInsultMessage(actorProxy,args[0].toString()));
-                    break;
-                case "getAllInsult":
-                    actorProxy.send(new GetAllInsultMessage(actorProxy));
-                    invocationResult = actorProxy.receive().getMessage();
-                    break;
-                case "getInsult":
-                    actorProxy.send(new GetInsultMessage(actorProxy));
-                    invocationResult = actorProxy.receive().getMessage();
-                    break;
-                default:
-                    System.out.println("Before method " + method.getName());
-                    invocationResult = method.invoke(this.target, args);
-                    System.out.println("After method " + method.getName());
+
+            for(Field field: target.getClass().getDeclaredFields()){
+                if(field.getType().equals(ActorProxy.class))
+                    field.set(target,actorProxy);
             }
+            invocationResult = method.invoke(target, args);
 
         }
         catch(InvocationTargetException ite)
