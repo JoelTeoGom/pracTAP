@@ -21,7 +21,7 @@ class MonitorServiceTest {
 
     @Test
     void monitorActor() {
-        Actor actor = new Actor();
+        Actor actor = new InsultActor();
         ActorContext.getInstance().spawnActor("actor",actor);
         assertTrue(MonitorService.getInstance().getMonitoredActor().containsKey(actor));
     }
@@ -29,7 +29,7 @@ class MonitorServiceTest {
 
     @Test
     void subscribe() {
-        Actor actor = new Actor();
+        Actor actor = new InsultActor();
         ActorContext.getInstance().spawnActor("actor",actor);
         Observer o1 = new ActionListener();
         MonitorService.getInstance().subscribe("actor",o1);
@@ -38,7 +38,7 @@ class MonitorServiceTest {
 
     @Test
     void unsubscribe() {
-        Actor actor = new Actor();
+        Actor actor = new InsultActor();
         ActorContext.getInstance().spawnActor("actor",actor);
         Observer o1 = new ActionListener();
         Observer o2 = new ActionListener();

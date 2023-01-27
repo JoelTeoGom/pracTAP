@@ -2,6 +2,7 @@ package Insult;
 
 import Estructura.Actor;
 import Estructura.ActorProxy;
+import Estructura.ProxyProxy;
 import Message.*;
 import Observer.Event;
 import Observer.MonitorService;
@@ -24,7 +25,7 @@ public class InsultActor extends Actor {
      * metode process: mirem quin tipus de classe insult es i actuem depenent d'aquesta
      * @param m
      */
-    @Override
+
     public void process(Message m) throws InterruptedException {
         Message message = null;
         MonitorService.getInstance().publish(Event.RECEIVE,this,m);
@@ -34,14 +35,16 @@ public class InsultActor extends Actor {
                 break;
             case GetInsultMessage m1:
                 int numeroAleatorio = (int) (Math.random()*(listaInsultos.size())+0);
+                ProxyProxy auxProxy = new ProxyProxy(m1.getFrom());
                 message = new Message(new ActorProxy(this), listaInsultos.get(numeroAleatorio));
                 MonitorService.getInstance().publish(Event.SEND,this,message);
-                m1.getFrom().getQueue().put(message);
+                auxProxy.send(message);
                 break;
             case GetAllInsultMessage m1:
+                ProxyProxy aux = new ProxyProxy(m1.getFrom());
                 message = new Message(new ActorProxy(this),listaInsultos.toString());
                 MonitorService.getInstance().publish(Event.SEND,this,message);
-                m1.getFrom().getQueue().put(message);
+                aux.send(message);
                 break;
             case QuitMessage m1:
                 MonitorService.getInstance().publish(Event.STOPPED,this,m);

@@ -18,7 +18,7 @@ class ActorProxyTest {
     void send() throws InterruptedException {
         ActorProxy hello = ActorContext.getInstance().spawnActor("HelloWorldActor",new HelloWorldActor());
         for(int i = 0; i<5;i++){
-            ActorProxy proxy = ActorContext.getInstance().spawnActor("Actor "+i,new Actor());
+            ActorProxy proxy = ActorContext.getInstance().spawnActor("Actor "+i,new InsultActor());
             hello.send(new HelloWorldMessage(proxy,"Hello World"));
         }
     }
@@ -45,7 +45,7 @@ class ActorProxyTest {
     void receivefromDiferentActorTest() throws InterruptedException {
         ActorProxy pxy = ActorContext.getInstance().spawnActor("insulter", new InsultActor());
         for(int i = 0; i<5; i++) {
-            ActorProxy insulter = ActorContext.getInstance().spawnActor("Actor "+i,new Actor());
+            ActorProxy insulter = ActorContext.getInstance().spawnActor("Actor "+i,new InsultActor());
             pxy.send(new AddInsultMessage(insulter,"taco"+i));
         }
         pxy.send(new GetAllInsultMessage(null));

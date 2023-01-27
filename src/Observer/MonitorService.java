@@ -124,11 +124,6 @@ public class MonitorService{
         llistaTraficActor.put(Traffic.MEDIUM,med);
         llistaTraficActor.put(Traffic.HIGH,high);
 
-//        for(Actor actor: monitoredActor.keySet()){
-//            int size = llistaMessageActor.get(actor).size();
-//            switch ()
-//        }
-
         return llistaTraficActor;
     }
 

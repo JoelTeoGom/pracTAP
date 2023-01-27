@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public class Actor implements Iactor{
+public abstract class Actor implements Iactor{
     protected BlockingQueue<Message> queue;
     protected String state;
     protected Boolean exit;
@@ -21,8 +21,7 @@ public class Actor implements Iactor{
 
     /**
      * constructor
-     * inicialitzem traffic a 0
-     * inicialitzem event
+     * inicialitzem state
      * inicialitzem la cua
      * inicialitzem exit a false
      */
@@ -40,19 +39,6 @@ public class Actor implements Iactor{
      * @throws InterruptedException
      */
     public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
-        System.out.println("Soy un actor padre");
-        MonitorService.getInstance().publish(Event.RECEIVE,this,m);
-        switch (m) {
-            case HelloWorldMessage m1 -> {
-                    System.out.printf(m1.getMessage());
-            }
-            case QuitMessage m1 -> {
-                System.out.println("Oh hell naw!!!");
-                MonitorService.getInstance().publish(Event.STOPPED,this,m);
-                exit = true;
-            }
-            default -> System.out.print("No se ha registrado");
-        }
     }
 
     /**
