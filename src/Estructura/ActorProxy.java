@@ -45,7 +45,7 @@ public class ActorProxy implements Iactor{
 
     /**
      * getter de la cua
-     * @return BlockingQueue<Message>
+     * @return cua de missatges
      */
     public BlockingQueue<Message> getQueue() {
         return queue;

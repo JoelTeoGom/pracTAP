@@ -21,7 +21,7 @@ public class ActorDecorator extends Actor {
 
     /**
      * Gets the queue
-     * @return BlockingQueue<Message>
+     * @return cua de missatges
      */
     public BlockingQueue<Message> getQueue() {
         return this.actor.getQueue();

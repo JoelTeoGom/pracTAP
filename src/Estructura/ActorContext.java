@@ -56,7 +56,7 @@ public class ActorContext {
 
     /**
      * getter de la llista per poder obtindre els noms
-     * @return List<String>
+     * @return llista de strings amb els noms
      */
     public List<String> getNames(){
         return new ArrayList<>(actorLibrary.keySet());

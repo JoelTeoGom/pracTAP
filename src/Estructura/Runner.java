@@ -20,7 +20,6 @@ public class Runner implements Runnable{
 
     /**
      * metode per fer el run als actors
-     * @throws RuntimeException,RuntimeException
      */
     @Override
     public void run() {

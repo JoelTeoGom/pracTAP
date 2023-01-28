@@ -112,7 +112,7 @@ public class MonitorService{
 
     /**
      * getter del trafic
-     * @return HashMap<Traffic,List<String>>
+     * @return hashmap amb el trafic, indexat amb l'enum Traffic
      */
     public HashMap<Traffic,List<String>> getTraffic(){
 
@@ -131,7 +131,7 @@ public class MonitorService{
 
     /**
      * getter dels events
-     * @return HashMap<Event,List<String>>
+     * @return hashmap amb els actors corresponents a un cert event
      */
     public HashMap<Event,List<String>> getEvent(){
         for (Actor actor: monitoredActor.keySet()){
@@ -215,7 +215,7 @@ public class MonitorService{
     /**
      *  getter del nombre de misstages
      * @param actor
-     * @return List<Message>
+     * @return llista de missatges
      */
     public List<Message> getNumberOfMessages(Actor actor){
         return llistaMessageActor.get(actor);
@@ -224,7 +224,7 @@ public class MonitorService{
     /**
      * getter del nomre de missatges enviats
      * @param actor
-     * @return List<Message>
+     * @return llista de missatges
      */
     public List<Message> getSentMessages(Actor actor){
         return llistaSentMessageActor.get(actor);
@@ -233,7 +233,7 @@ public class MonitorService{
     /**
      * getter dels missatges rebuts
      * @param actor
-     * @return List<Message>
+     * @return llista de missatges
      */
     public List<Message> getReceivedMessages(Actor actor){
         return llistaReceivedMessageActor.get(actor);
@@ -242,7 +242,7 @@ public class MonitorService{
     /**
      * getter dels events dels actors
      * @param actor
-     * @return List<Message>
+     * @return llista de missatges
      */
     public List<Event> getEventsActor(Actor actor){
         return llistaActorEvents.get(actor);
@@ -250,7 +250,7 @@ public class MonitorService{
 
     /**
      * getter de la llista de actors observers
-     * @return HashMap<Actor, List<Observer>>
+     * @return mapa amb els observers per a un determinat actor
      */
     public HashMap<Actor, List<Observer>> getLlistaActorsObserver() {
         return llistaActorsObserver;
@@ -258,7 +258,7 @@ public class MonitorService{
 
     /**
      * getter del monitor Actor
-     * @return HashMap<Actor, List<Observer>>
+     * @return hashmap per retornar els noms dels actors guardats
      */
     public HashMap<Actor, String> getMonitoredActor() {
         return monitoredActor;
