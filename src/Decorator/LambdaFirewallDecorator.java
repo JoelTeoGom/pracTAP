@@ -15,7 +15,8 @@ public class LambdaFirewallDecorator extends ActorDecorator {
      * constructor
      * @param actor
      */
-    public LambdaFirewallDecorator(Actor actor) {super(actor);
+    public LambdaFirewallDecorator(Actor actor) {
+        super(actor);
     }
 
 

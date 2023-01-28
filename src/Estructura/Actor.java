@@ -41,6 +41,17 @@ public abstract class Actor implements Iactor{
     public void process(Message m) throws InterruptedException {  //en esta funcion actualizaremos estado
     }
 
+
+    /**
+     * @param message
+     * @throws InterruptedException
+     */
+    @Override
+    public void send(Message message) throws InterruptedException {
+        queue.put(message);
+    }
+
+
     /**
      * getter de la cua de missatges
      * @return
@@ -71,17 +82,5 @@ public abstract class Actor implements Iactor{
         this.exit = exit;
     }
 
-    /**
-     * setter del trrafic
-     * @return traffic
-     */
 
-
-    /**
-     * @param message
-     * @throws InterruptedException
-     */
-    @Override
-    public void send(Message message) throws InterruptedException {
-    }
 }

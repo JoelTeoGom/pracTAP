@@ -31,7 +31,7 @@ public class ActorProxy implements Iactor{
         if(message.getFrom() == null){    //en caso que el from del mensaje este Null por default se pondra el propio proxy
             message.setFrom(this);          //asi podra responder el actor
         }
-        this.sourceActor.getQueue().put(message);
+        sourceActor.send(message);
     }
 
     /**
