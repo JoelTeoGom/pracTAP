@@ -14,7 +14,9 @@ public class EncryptionDecorator extends ActorDecorator {
      * Constructor
      * @param actor
      */
-    public EncryptionDecorator (Actor actor){super(actor);}
+    public EncryptionDecorator (Actor actor){
+        super(actor);
+    }
 
     /**
      * Encripta el missatge

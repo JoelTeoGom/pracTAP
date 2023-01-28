@@ -52,7 +52,7 @@ public class InsultActor extends Actor {
                 exit = true;
                 break;
             default:
-                throw new IllegalStateException("Unexpected value: " + m);
+                System.out.println("No s'ha enviat cap missatge");
         }
 
 

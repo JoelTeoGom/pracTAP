@@ -14,16 +14,10 @@ public class DecoratorDemo {
         ActorProxy p2 = ActorContext.getInstance().spawnActor("Actor2",new EncryptionDecorator(new InsultActor()));
         ActorProxy p3 = ActorContext.getInstance().spawnActor("Actor3",new LambdaFirewallDecorator(new InsultActor()));
         ActorProxy p = ActorContext.getInstance().spawnActor2("Actor",new  InsultActor());
-
         String h = "holaaa soc pepito";
-        p2.getSourceActor().send(new HelloWorldMessage(p,h));
-        p2.getSourceActor().process(new HelloWorldMessage(p,p.receive().getMessage()));
+        p2.send(new HelloWorldMessage(p,h));
+        p3.send(new HelloWorldMessage(p,h));
 
-        p3.getSourceActor().send(new HelloWorldMessage(p,h));
-
-        p1.getSourceActor().process(new HelloWorldMessage(p,h));
-
-        p1.getSourceActor().process(new HelloWorldMessage(p2,h));
     }
 
 }
