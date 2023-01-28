@@ -17,6 +17,8 @@ class DecoratorTest {
     ActorProxy p1 = ActorContext.getInstance().spawnActor("Actor1",new FirewallDecorator(new Actor()));
     ActorProxy p2 = ActorContext.getInstance().spawnActor("Actor2",new EncryptionDecorator(new Actor()));
     ActorProxy p3 = ActorContext.getInstance().spawnActor("Actor3",new LambdaFirewallDecorator(new Actor()));
+
+    ActorProxy p4 = ActorContext.getInstance().spawnActor("Actor4",new EncryptionDecorator(new FirewallDecorator(new LambdaFirewallDecorator(new Actor()))));
     ActorProxy p = ActorContext.getInstance().spawnActor2("Actor",new Actor());
     String h = "abc";
 
@@ -48,6 +50,12 @@ class DecoratorTest {
     void testFirewallDecoratorNotFind() throws InterruptedException {
         p1.send(new HelloWorldMessage(p,h));
 
+    }
+
+    // encripta, decripta, envia ja que no comença per h, i no esta trobat ja que p no esta al actor context.
+    @Test
+    void test3decorators()throws InterruptedException{
+        p4.send(new HelloWorldMessage(p,h));
     }
 
 
