@@ -75,4 +75,8 @@ public class ActorDecorator extends Actor {
     public void send(Message message) throws InterruptedException {
         this.actor.send(message);
     }
+
+    public Actor getActor(){
+        return actor;
+    }
 }

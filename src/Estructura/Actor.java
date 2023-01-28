@@ -13,7 +13,7 @@ import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingDeque;
 
-public abstract class Actor implements Iactor{
+public class Actor implements Iactor{
     protected BlockingQueue<Message> queue;
     protected String state;
     protected Boolean exit;

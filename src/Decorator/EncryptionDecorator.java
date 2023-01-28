@@ -28,7 +28,7 @@ public class EncryptionDecorator extends ActorDecorator {
         String text = message.getMessage();
         char[] chars = text.toCharArray();
         for (int i=0;i<chars.length;i++){
-            chars[i] -= 8;
+            chars[i] += 3;
         }
         message.setMessage(String.valueOf(chars));
         System.out.println("missatge encriptat: "+message.getMessage());
@@ -49,7 +49,7 @@ public class EncryptionDecorator extends ActorDecorator {
         char[] chars = text.toCharArray();
 
         for (int i=0;i<chars.length;i++){
-            chars[i] += 8;
+            chars[i] -= 3;
         }
 
         m.setMessage(String.valueOf(chars));

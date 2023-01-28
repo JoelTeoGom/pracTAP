@@ -1,6 +1,7 @@
 package Estructura;
 
 
+import Decorator.ActorDecorator;
 import Observer.MonitorService;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class ActorContext {
      * @return actorProxy
      */
     public ActorProxy spawnActor(String name, Actor actor){
+
         ActorProxy actorProxy = new ActorProxy(actor);
         Runner runner = new Runner(actor);
         actorLibrary.put(name,actor);
